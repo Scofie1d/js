@@ -1,0 +1,5 @@
+{
+    "editor.bracketPairColorization.enabled": true,
+    "editor.defaultFormatter": "HookyQR.beautify",
+    "editor.rulers": [80]
+}
