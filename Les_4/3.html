@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Homework4.3</title>
 </head>
+
 <body>
-<!--
+  <!--
 Необязательное задание.
 
 Необходимо создать функцию getDigitsOfNumber, которая принимает целое
@@ -28,23 +30,31 @@
 Обратите внимание на слова "от 0 до 1000", это означает диапазон [0, 999], что
 можно прочитать как "от нуля до 999 включительно".
 -->
-<script>
-  "use strict";
+  <script>
+    "use strict";
 
-  function getDigitsOfNumber(num) {
-    if (!Number.isInteger(num) || num < 0 || num > 999) {
-      console.log('Введено число не из указанного диапазона!');
-      return{};
+    /**
+     * Функция разбивает полученное число на разряды и возвращает объект
+     * с записанным в него количеством каждого разряда.
+     * @param {number} num - введенное число от 0 до 999.
+     * @returns {object} - объект, в который записано количество разрядов,
+     * или ничего, если введено неверное значение.
+     */
+    function getDigitsOfNumber(num) {
+      if (!Number.isInteger(num) || num < 0 || num > 999) {
+        console.error('Введено число не из указанного диапазона!');
+        return {};
+      }
+
+      return {
+        units: num % 10,
+        dozens: Math.floor(num / 10) % 10,
+        hundreds: Math.floor(num / 100),
+      }
     }
 
-    return{
-      units: num % 10,
-      dozens: Math.floor(num / 10) % 10,
-      hundreds: Math.floor(num / 100),
-    }
-  }
-
-  console.log(getDigitsOfNumber(+prompt('Ввведите число от 0 до 999')));
-</script>
+    console.log(getDigitsOfNumber(+prompt('Ввведите число от 0 до 999')));
+  </script>
 </body>
+
 </html>
