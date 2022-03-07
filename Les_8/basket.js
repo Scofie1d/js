@@ -15,6 +15,7 @@ document.querySelector('.featuredItems').addEventListener('click', event => {
     if(!event.target.closest('.addToCart')) {
         return;
     }
+
     const featuredItemEl = event.target.closest('.featuredItem');
     const id = +featuredItemEl.dataset.id;
     const name = featuredItemEl.dataset.name;
@@ -29,33 +30,32 @@ function addToCart(id, name, price) {
     }
     basket[id].count++;
     quantityEl.textContent = getTotalCount().toString();
-    basketTotalValueEl.getTotalPrice().toFixed(2);
-    createProduct(id);
+    basketTotalValueEl.textContent = getTotalPrice().toFixed(2);
+    createProductInBasket(id);
 }
 
 function getTotalCount() {
-    return Object.values(basket).reduce((acc, product) => acc + product.price, 0);
+    return Object.values(basket).reduce((acc, product) => acc + product.count, 0);
 }
 
 function getTotalPrice() {
-    return Object.values(basket).reduce ((acc, product) => acc + product.price * product.count, 0);
+    return Object.values(basket).reduce((acc, product) => acc + product.price * product.count, 0);
 }
 
-function createProduct(productId) {
+function createProductInBasket(productId) {
   const basketRowEl = basketEl.querySelector(`.basketRow[data-id ="${productId}"]`);
   if(!basketRowEl){
-      createNewProduct(productId);
+      createNewProductInBasket(productId);
       return;
   }
 
   const product = basket[productId];
 
   basketRowEl.querySelector('.productCount').textContent = product.count;
-  basketRowEl.querySelector('.productTotalRow').textContent = (product.price * product.count)
-  .toFixed(2);
+  basketRowEl.querySelector('.productTotalRow').textContent = (product.price * product.count).toFixed(2);
 }
 
-function createNewProduct(productId) {
+function createNewProductInBasket(productId) {
      const productRow = `
     <div class="basketRow" data-id="${productId}">
       <div>${basket[productId].name}</div>
